@@ -1,0 +1,33 @@
+.row ng-show="check"
+  h2.text-center
+    | Estudantes
+  = form_tag url_for_options: { action: public_cadastre_create_path, method: :post }, html_options: { class: 'form form-horizontal', role: 'student_form', name: 'student_form' } do
+    .form-group
+      label for="student[name]"
+        | Nome
+      input [class="form-control" type="text" placeholder="Nome" name="student[name]" required]
+    .form-group
+      label for="student[register_number]"
+        | Número de Registro
+      input [class="form-control" type="text" name="student[register_number]" required]
+    .form-group
+      button.pull-right.btn.btn-default type="submit"
+        | Criar
+      .clearfix
+
+.row ng-show="!check"
+  h2.text-center
+    | Cursos
+  = form_tag url_for_options: { action: public_cadastre_create_path, method: :post }, html_options: { class: 'form form-horizontal', role: 'course_form', name: 'course_form' } do
+    .form-group
+      label for="course[name]"
+        | Nome
+      input [class="form-control" type="text" placeholder="Nome" name="course[name]" required]
+    .form-group
+      label for="course[description]"
+        | Descrição
+      input [class="form-control" type="text" name="course[description]" placeholder="Breve Descrição" required]
+    .form-group
+      button.pull-right.btn.btn-default type="submit"
+        | Criar
+      .clearfix

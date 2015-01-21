@@ -1,0 +1,47 @@
+.row
+  h2.text-center
+    | Matrículas
+  - if @classrooms.any?
+    .panel.panel-default
+      .panel-heading
+        | As matrículas já feitas são:
+      table.table
+        thead
+          tr
+            th #
+            th Estudante
+            th Curso
+            th Data de Criação
+        tbody
+          - @classrooms.each do |class_el|
+            tr
+              th
+                = class_el.id
+              th
+                = class_el.student.name
+              th
+                = class_el.course.name
+              th
+                = class_el.entry_at.strftime("%b, %m %Y - %H:%M")
+  - if @students.empty?
+    .alert.alert-danger
+      p
+        | Cadastre estudantes primeiro.
+  - elsif @courses.empty?
+    .alert.alert-danger
+        p
+          | Cadastre cursos primeiro.
+  - else
+    = form_tag url_for_options: { action: public_classrooms_create_path, method: :post }, html_options: { class: 'form form-horizontal', role: 'student_form', name: 'student_form' } do
+      .form-group
+        label for="classroom[student_id]"
+          | Estudante
+        = select_tag "classroom[student_id]", options_from_collection_for_select(@students, "id", "name"), { :include_blank => '-- Selecione Estudante --', :required => true, class: "form-control" }
+      .form-group
+        label for="classroom[course_id]"
+          | Curso
+        = select_tag "classroom[course_id]", options_from_collection_for_select(@courses, "id", "name"), { :include_blank => '-- Selecione Curso --' , :required => true, class: "form-control" }
+      .form-group
+        button.pull-right.btn.btn-default type="submit"
+          | Criar
+        .clearfix

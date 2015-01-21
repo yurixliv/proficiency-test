@@ -1,0 +1,18 @@
+#encoding: utf-8
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: proficiency_development
+  pool: 5
+
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: proficiency_test
+  pool: 5
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: proficiency_production
+  pool: 5
